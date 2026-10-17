@@ -1,1 +1,269 @@
-PLACEHOLDER_CSS
+/* 消化有方 · 中西医消化病科普周刊 */
+:root{
+  --page:#ece4d9;
+  --surface:#f4f0ea;
+  --card:#fffbf5;
+  --ink:#4f483e;
+  --muted:#8a7d6b;
+  --accent:#f54001;
+  --tint:#ffc198;
+  --c-west:#2052bb;
+  --c-tcm:#c00000;
+  --c-mix:#f54001;
+  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Consolas,"Courier New",monospace;
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--page);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--tint);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+
+/* 阅读进度条 */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:100%;
+  background:var(--accent);
+  transform-origin:0 50%;transform:scaleX(0);
+  z-index:100;opacity:0;transition:opacity .3s;
+}
+body.on-article #progress{opacity:1}
+
+/* ============ 报头 ============ */
+.masthead{
+  padding:2.2rem 1.5rem 0;
+  text-align:center;
+  border-bottom:1px solid var(--ink);
+}
+.masthead-meta{
+  display:flex;align-items:center;justify-content:center;gap:1.2rem;
+  font-size:.68rem;letter-spacing:.18em;color:var(--muted);
+  text-transform:uppercase;padding-bottom:1.4rem;
+}
+.masthead-rule{flex:0 1 6rem;height:1px;background:var(--muted);opacity:.5}
+.brand{
+  font-family:var(--serif);
+  font-size:clamp(3.2rem,9vw,5.8rem);
+  font-weight:900;line-height:1.15;letter-spacing:.12em;
+  padding:.6rem 0 .2rem;
+}
+.brand-sub{font-size:.72rem;letter-spacing:.42em;color:var(--muted);text-transform:uppercase;padding:.4rem 0}
+.brand-tag{
+  font-family:var(--serif);font-size:.95rem;color:var(--ink);
+  letter-spacing:.28em;padding:.2rem 0 1.6rem;
+}
+.brand-tag em{font-style:normal;color:var(--accent)}
+
+/* 栏目导航 */
+.tabs{
+  display:flex;justify-content:center;gap:clamp(1rem,4vw,3rem);
+  border-top:1px solid rgba(79,72,62,.28);
+  padding:1.1rem 1rem;flex-wrap:wrap;
+}
+.tabs a{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
+  color:var(--muted);text-align:center;line-height:1.5;
+  padding:.35rem .2rem;border-bottom:2px solid transparent;
+  transition:color .2s var(--ease),border-color .2s var(--ease);
+}
+.tabs a span{
+  display:block;font-family:var(--serif);font-size:1.02rem;
+  letter-spacing:.3em;color:var(--ink);margin-top:.15rem;text-indent:.3em;
+  transition:color .2s var(--ease);
+}
+.tabs a:hover{color:var(--ink)}
+.tabs a.active{border-color:currentColor;color:var(--muted)}
+.tabs a.active.c-west{color:var(--c-west)} .tabs a.active.c-west span{color:var(--c-west)}
+.tabs a.active.c-tcm{color:var(--c-tcm)} .tabs a.active.c-tcm span{color:var(--c-tcm)}
+.tabs a.active.c-mix{color:var(--c-mix)} .tabs a.active.c-mix span{color:var(--c-mix)}
+.tabs a.active:not(.c-west):not(.c-tcm):not(.c-mix) span{color:var(--accent)}
+
+/* ============ 首页 ============ */
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+
+.featured{
+  margin:2.6rem auto 0;
+  background:var(--card);
+  display:grid;grid-template-columns:1.25fr 1fr;
+  cursor:pointer;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.featured:hover{transform:translateY(-4px);box-shadow:0 18px 44px -18px rgba(79,72,62,.35)}
+.featured-main{padding:2.6rem 2.8rem;border-right:1px solid rgba(79,72,62,.16)}
+.featured-side{padding:2.6rem 2.4rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.6rem;background:var(--surface)}
+.kicker{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:1.1rem;display:block;
+}
+.featured h2{
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.45;letter-spacing:.02em;
+}
+.featured h2 .prefix{color:var(--c-mix)}
+.featured-excerpt{color:var(--muted);font-size:.95rem;line-height:1.9}
+.featured .meta-row{margin-top:1.6rem}
+
+.meta-row{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;
+  color:var(--muted);display:flex;gap:1.4rem;flex-wrap:wrap;align-items:center;
+}
+.read-cue{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--accent)}
+.read-cue::after{content:" →";transition:margin .25s var(--ease)}
+.featured:hover .read-cue::after{margin-left:.35rem}
+
+/* 工具行 */
+.toolbar{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  margin:3.2rem 0 1.6rem;flex-wrap:wrap;
+}
+.toolbar .count{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--muted)}
+.search{
+  display:flex;align-items:center;gap:.6rem;
+  border-bottom:1px solid var(--muted);padding:.3rem 0;min-width:min(20rem,100%);
+}
+.search svg{width:.95rem;height:.95rem;stroke:var(--muted);flex:none}
+.search input{
+  border:none;background:transparent;outline:none;width:100%;
+  font-family:var(--sans);font-size:.92rem;color:var(--ink);
+}
+.search input::placeholder{color:var(--muted);opacity:.75}
+
+/* 卡片网格 */
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;
+  padding-bottom:4rem;
+}
+.card{
+  background:var(--card);padding:1.7rem 1.6rem 1.4rem;
+  display:flex;flex-direction:column;gap:.8rem;min-height:15rem;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 38px -18px rgba(79,72,62,.4)}
+.card-top{
+  display:flex;justify-content:space-between;
+  font-size:.66rem;letter-spacing:.14em;color:var(--muted);
+}
+.tag{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;
+  width:fit-content;padding-bottom:.2rem;border-bottom:1.5px solid currentColor;
+}
+.tag.t-west{color:var(--c-west)} .tag.t-tcm{color:var(--c-tcm)} .tag.t-mix{color:var(--c-mix)}
+.card h3{
+  font-family:var(--serif);font-weight:700;font-size:1.12rem;line-height:1.6;
+  letter-spacing:.01em;
+}
+.card h3 .prefix{font-weight:600}
+.card:nth-child(6n+1) h3 .prefix{color:var(--c-west)}
+.card .excerpt{
+  font-size:.86rem;color:var(--muted);line-height:1.85;flex:1;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card .meta-row{margin-top:.4rem}
+
+.empty{
+  text-align:center;padding:4rem 1rem;color:var(--muted);
+  font-family:var(--serif);letter-spacing:.1em;display:none;
+}
+
+/* ============ 阅读页 ============ */
+.reader{max-width:44rem;margin:0 auto;padding:2.8rem 3rem 4rem}
+.reader-top{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.68rem;letter-spacing:.14em;color:var(--muted);
+  padding-bottom:2rem;
+}
+.reader-top a{transition:color .2s var(--ease)}
+.reader-top a:hover{color:var(--accent)}
+.reader h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(1.7rem,4.2vw,2.45rem);line-height:1.5;letter-spacing:.02em;
+  margin:1.4rem 0 1.2rem;
+}
+.reader h1 .prefix{font-weight:700}
+.reader .lede{
+  font-family:var(--serif);font-size:1.08rem;line-height:2;color:var(--muted);
+  padding:1.4rem 0;margin:1.8rem 0 0;
+  border-top:1px solid rgba(79,72,62,.25);border-bottom:1px solid rgba(79,72,62,.25);
+}
+.reader section{margin:2.6em 0}
+.reader h2{
+  font-family:var(--serif);font-size:1.32rem;font-weight:700;letter-spacing:.04em;
+  display:flex;align-items:baseline;gap:.7rem;
+  padding-bottom:.55rem;margin-bottom:1.2rem;
+  border-bottom:1px solid rgba(79,72,62,.18);
+}
+.reader h2 .no{font-family:var(--mono);font-size:.8rem;font-weight:500;letter-spacing:.1em}
+.reader p{
+  font-size:1.06rem;line-height:2.05;letter-spacing:.015em;
+  text-align:justify;
+}
+.reader p+p{margin-top:1em}
+.reader section:first-of-type p:first-of-type::first-letter{
+  font-family:var(--serif);font-weight:700;
+  font-size:3em;float:left;line-height:1.05;
+  padding:.08em .18em 0 0;color:var(--accent);
+}
+.notice{
+  margin-top:3rem;padding:1.3rem 1.5rem;
+  background:rgba(255,193,152,.28);
+  font-size:.85rem;line-height:1.9;color:var(--ink);
+}
+.notice strong{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+  display:block;margin-bottom:.4rem;color:var(--accent);font-weight:500;
+}
+.prevnext{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;
+  margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(79,72,62,.25);
+}
+.prevnext a{display:block;padding:1.1rem 1.2rem;background:var(--card);transition:transform .3s var(--ease)}
+.prevnext a:hover{transform:translateY(-3px)}
+.prevnext .dir{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--muted);display:block;margin-bottom:.5rem}
+.prevnext .t{font-family:var(--serif);font-size:.92rem;line-height:1.6;font-weight:700}
+.prevnext .next{text-align:right}
+.prevnext .placeholder{background:transparent}
+
+/* ============ 页脚 ============ */
+footer{background:var(--ink);color:#d8d0c2;margin-top:2rem}
+.foot-inner{
+  max-width:72rem;margin:0 auto;padding:3rem 1.5rem 2.4rem;
+  display:flex;flex-direction:column;gap:1.1rem;
+}
+.foot-brand{font-family:var(--serif);font-size:1.5rem;font-weight:900;letter-spacing:.2em;color:#f4f0ea}
+.foot-line{font-size:.82rem;line-height:1.9;opacity:.75;max-width:40rem}
+.foot-meta{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;opacity:.55;
+  text-transform:uppercase;padding-top:1.2rem;border-top:1px solid rgba(244,240,234,.18);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+
+/* ============ 动效 ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ============ 响应式 ============ */
+@media (max-width:880px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .featured{grid-template-columns:1fr}
+  .featured-main{border-right:none;border-bottom:1px solid rgba(79,72,62,.16)}
+}
+@media (max-width:620px){
+  .grid{grid-template-columns:1fr}
+  .reader{padding:2rem 1.2rem 3rem}
+  .masthead-meta{gap:.7rem;font-size:.6rem}
+  .featured-main,.featured-side{padding:1.8rem 1.4rem}
+  .tabs a span{font-size:.88rem;letter-spacing:.2em}
+}

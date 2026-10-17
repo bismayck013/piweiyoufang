@@ -1,1 +1,51 @@
-PLACEHOLDER_INDEX
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>脾胃有方 · 中西医消化病科普月刊</title>
+<meta name="description" content="中西医结合消化健康科普专栏：西医视角、中医智慧、中西结合三大栏目，共36期，每月更新。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="masthead">
+  <div class="masthead-meta mono">
+    <span>2023.10—2026.09 · NO.01—36</span>
+    <span class="masthead-rule"></span>
+    <span>中西医结合消化健康科普</span>
+    <span class="masthead-rule"></span>
+    <span id="today"></span>
+  </div>
+  <h1 class="brand"><a href="#/">脾胃有方</a></h1>
+  <p class="brand-sub mono">The Digestive Wellness Monthly</p>
+  <p class="brand-tag">蔡淦名老中医传承创新工作室科普栏目 · <em>每月一期</em></p>
+  <nav class="tabs" id="tabs">
+    <a href="#/" data-cat="all">ALL<span>全部</span></a>
+    <a href="#/c/west" data-cat="west" class="c-west">WESTERN<span>西医视角</span></a>
+    <a href="#/c/tcm" data-cat="tcm" class="c-tcm">CHINESE<span>中医智慧</span></a>
+    <a href="#/c/mix" data-cat="mix" class="c-mix">INTEGRATIVE<span>中西结合</span></a>
+  </nav>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">脾胃有方</div>
+    <p class="foot-line">本刊为健康科普读物，由「蔡淦名老中医专家传承创新工作室」出品。全部内容仅供健康知识参考，不构成任何诊断、治疗或用药建议。如有身体不适，请及时前往正规医疗机构就诊，在医师指导下进行诊治。</p>
+    <div class="foot-meta">
+      <span>© 2026 蔡淦名老中医专家传承创新工作室</span>
+      <span>西医视角 × 中医智慧 × 中西结合 · 共36期</span>
+    </div>
+  </div>
+</footer>
+
+<script src="articles.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
